@@ -11,6 +11,6 @@ export class HealthController {
   @Get()
   @HealthCheck()
   check() {
-    return this._health.check([() => this._http.pingCheck('Simple health check v1.0.8', 'https://www.google.com/')]);
+    return this._health.check([() => this._http.pingCheck('Simple health check v1.0.9', 'https://www.google.com/')]);
   }
 }

@@ -25,7 +25,7 @@ import { LoggerModule } from 'nestjs-pino';
         const appConfig: AppConfigModel = config.get('appConfig');
 
         const transport =
-          appConfig.environment === EAppEnvironment.PRODUCTION
+          appConfig.environment === EAppEnvironment.Local
             ? { target: 'pino-pretty', options: { singleLine: true, messageKey: 'message' } }
             : undefined;
         const level = appConfig.environment === EAppEnvironment.Local ? 'debug' : 'info';
