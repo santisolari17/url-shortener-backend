@@ -5,6 +5,7 @@ import { MakeShortUrlUseCase } from './UrlShortener/MakeShortUrl.usecase';
 import { RedirectShortUrlUseCase } from './UrlShortener/RedirectShortUrl.usecase';
 import { GetUrlShortenedListUseCase } from './UrlShortener/GetUrlShortenedList.usecase';
 import { DeleteUrlsUseCase } from './UrlShortener/DeleteUrls.usecase';
+import { GetShortUrlByIdUseCase } from './UrlShortener/GetShortReferenceByShortUrlUseCase.usecase';
 
 @Module({
   imports: [ServicesModule],
@@ -13,6 +14,7 @@ import { DeleteUrlsUseCase } from './UrlShortener/DeleteUrls.usecase';
     MakeShortUrlUseCase,
     RedirectShortUrlUseCase,
     DeleteUrlsUseCase,
+    GetShortUrlByIdUseCase,
     Oauth2ClientCredentialsAuthenticationUsecase,
   ],
   exports: [
@@ -20,6 +22,7 @@ import { DeleteUrlsUseCase } from './UrlShortener/DeleteUrls.usecase';
     MakeShortUrlUseCase,
     RedirectShortUrlUseCase,
     DeleteUrlsUseCase,
+    GetShortUrlByIdUseCase,
     Oauth2ClientCredentialsAuthenticationUsecase,
   ],
 })
