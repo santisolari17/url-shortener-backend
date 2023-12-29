@@ -3,6 +3,7 @@ import { AppConfigService } from '../../../infrastructure/services/appConfig/App
 import { INosqlStore, I_NOSQL_STORE } from 'src/infrastructure/modules/noSqlStore/interfaces/INoSqlStore';
 import { ShortUrl } from 'src/domain/entities/ShortUrl.entity';
 import { ValidateEntityParams } from '../../../infrastructure/decorators/ValidateEntityParam';
+import { ENoSqlQueryOperators } from 'src/infrastructure/modules/noSqlStore/enums/ENoSqlQueryOperators';
 
 @Injectable()
 export class UrlShortenerService {
@@ -21,7 +22,12 @@ export class UrlShortenerService {
   }
 
   public async getShortUrlByLongUrl(longUrl: string): Promise<ShortUrl | null> {
-    return await this._noSqlStore.findByPropertyEquality(this._config.config.dynamoDb.tableName, 'longUrl', longUrl);
+    return await this._noSqlStore.findBy(this._config.config.dynamoDb.tableName, {
+      property: 'longUrl',
+      value: longUrl,
+      queryOperator: ENoSqlQueryOperators.EqualTo,
+      propertyIndexName: 'longUrlIndex',
+    });
   }
 
   public async getShortUrlReference(urlId: string): Promise<ShortUrl> {

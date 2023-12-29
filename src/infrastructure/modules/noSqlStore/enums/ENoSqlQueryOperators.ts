@@ -1,7 +1,7 @@
 export enum ENoSqlQueryOperators {
   GreaterThan = '>',
   GreaterOrEqualThan = '>=',
-  EqualTo = '==',
+  EqualTo = '=',
   LessThan = '<',
   LessOrEqualThan = '<=',
   In = 'in',

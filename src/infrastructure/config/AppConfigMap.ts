@@ -24,6 +24,7 @@ export default async () => {
       region: process.env.AWS_DYNAMODB_REGION,
       endpoint: process.env.AWS_DYNAMODB_ENDPOINT_URL,
       tableName: process.env.AWS_DYNAMODB_TABLE_NAME,
+      eventsTableName: process.env.AWS_DYNAMODB_EVENTS_TABLE_NAME,
     },
   };
 

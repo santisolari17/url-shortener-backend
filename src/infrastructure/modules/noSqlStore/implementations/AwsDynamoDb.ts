@@ -4,6 +4,7 @@ import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 import * as AWS from 'aws-sdk';
 import { INosqlStore } from '../interfaces/INoSqlStore';
 import { EAppEnvironment } from 'src/infrastructure/enums/EAppEnvironment';
+import { QueryPropertyFilter } from '../types/QueryPropertyFilter.type';
 
 @Injectable()
 export class AwsDynamoDb implements INosqlStore {
@@ -32,7 +33,7 @@ export class AwsDynamoDb implements INosqlStore {
     this._client = dynamoDBClient;
   }
 
-  public async put<T>(collection: string, data: T): Promise<any> {
+  public async put<T>(collection: string, data: T): Promise<void> {
     await this._client()
       .put({
         TableName: collection,
@@ -63,14 +64,14 @@ export class AwsDynamoDb implements INosqlStore {
     return result.Item;
   }
 
-  public async findByPropertyEquality(collection: string, propertyName: string, propertyValue: any): Promise<any> {
+  public async findBy(collection: string, filter: QueryPropertyFilter): Promise<any> {
     const result = await this._client()
       .query({
         TableName: collection,
-        IndexName: 'longUrlIndex',
-        KeyConditionExpression: `longUrl = :url`,
+        IndexName: filter.propertyIndexName || undefined,
+        KeyConditionExpression: `${filter.property} ${filter.queryOperator} :val`,
         ExpressionAttributeValues: {
-          ':url': propertyValue,
+          ':val': filter.value,
         },
       })
       .promise();
